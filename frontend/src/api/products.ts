@@ -4,6 +4,7 @@ export interface Product {
   price: number;
   description: string;
   imageUrl: string;
+  category: string;
 }
 
 interface RawProduct {
@@ -11,6 +12,7 @@ interface RawProduct {
   name: string;
   price: string;
   description: string;
+  category: string;
 }
 
 export async function fetchProducts(): Promise<Product[]> {
