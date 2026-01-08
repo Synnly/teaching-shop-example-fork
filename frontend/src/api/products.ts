@@ -1,3 +1,4 @@
+export const API_VERSION = "2.0-shipping";
 export interface Product {
   id: number;
   name: string;
@@ -34,14 +35,14 @@ export async function fetchProducts(): Promise<Product[]> {
   //     description: "La savane illustre parfaitement la jungle créative de votre bébé !",
   //     imageUrl: "/bavoir3.jpg"
   // }];
-  const response = await fetch("http://localhost:8000/api/products/").then(
+  const response = await fetch("http://localhost:5000/api/products/").then(
     (res) =>
       res.json().then((data) =>
         data.map((p: RawProduct) => ({
           ...p,
           price: parseFloat(p.price),
-        }))
-      )
+        })),
+      ),
   );
   return response;
 }
