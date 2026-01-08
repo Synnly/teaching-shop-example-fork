@@ -10,3 +10,10 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+
+class Carrier(models.Model):
+    name = models.CharField(max_length=100)
+    delay_days = models.IntegerField()
+
+    def __str__(self):
+        return self.name
