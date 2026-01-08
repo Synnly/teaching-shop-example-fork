@@ -1,5 +1,7 @@
+import ReviewsSection from "../components/ReviewsSection";
 import { useProducts } from "../contexts/ProductsContext";
 import Products from "../Products";
+
 import Spinner from "../Spinner";
 
 export default function HomePage() {
@@ -64,6 +66,7 @@ export default function HomePage() {
           </div>
         </div>
       </main>
+         <ReviewsSection />
     </div>
   );
 }
