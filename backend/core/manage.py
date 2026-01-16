@@ -5,6 +5,7 @@ import os
 import sys
 import time
 
+
 def main():
     """Run administrative tasks."""
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "api.settings")
