@@ -45,8 +45,9 @@ class UserPurchaseFlowTests(TestCase):
 
         # TODO: Assert registration succeeded (status 201)
         # TODO: Extract the token from register_response.data['token']
-        pass  # Replace with your assertions and token extraction
-        token = None  # Replace None with the actual token extraction
+        self.assertEqual(register_response.status_code, status.HTTP_201_CREATED)
+        self.assertIn('token', register_response.data)
+        token = register_response.data['token']
 
         # Step 2: Get the list of products
         products_response = self.client.get('/api/products/')
@@ -54,8 +55,9 @@ class UserPurchaseFlowTests(TestCase):
         # TODO: Assert products endpoint returns 200
         # TODO: Assert at least one product is returned
         # TODO: Get the ID of the first product
-        pass  # Replace with your assertions
-        product_id = None  # Replace None with actual product ID extraction
+        self.assertEqual(products_response.status_code, status.HTTP_200_OK)
+        self.assertGreaterEqual(len(products_response.data), 1)
+        product_id = products_response.data[0]['id']
 
         # Step 3: Create an order (requires authentication)
         self.client.credentials(HTTP_AUTHORIZATION=f'Token {token}')
@@ -67,7 +69,9 @@ class UserPurchaseFlowTests(TestCase):
         # TODO: Assert order creation succeeded (status 201)
         # TODO: Assert order status is 'paid'
         # TODO: Assert card_last_four is '1111'
-        pass  # Replace with your assertions
+        self.assertEqual(order_response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(order_response.data['status'], 'paid')
+        self.assertEqual(order_response.data['card_last_four'], '1111')
 
     def test_user_can_view_their_orders(self):
         """
@@ -96,7 +100,9 @@ class UserPurchaseFlowTests(TestCase):
         # TODO: Assert orders endpoint returns 200
         # TODO: Assert exactly 1 order is returned
         # TODO: Assert the order contains the correct product name
-        pass  # Replace with your assertions
+        self.assertEqual(orders_response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(orders_response.data), 1)
+        self.assertEqual(orders_response.data[0]['product_name'], 'Baby Onesie')
 
 
 class PaymentValidationTests(TestCase):
@@ -130,7 +136,8 @@ class PaymentValidationTests(TestCase):
 
         # TODO: Assert status is 201 Created
         # TODO: Assert order status is 'paid'
-        pass  # Replace with your assertions
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(response.data['status'], 'paid')
 
     def test_declined_card_returns_payment_error(self):
         """Cards starting with 0000 should be declined"""
@@ -141,7 +148,8 @@ class PaymentValidationTests(TestCase):
 
         # TODO: Assert status is 402 Payment Required
         # TODO: Assert response contains an 'error' message
-        pass  # Replace with your assertions
+        self.assertEqual(response.status_code, status.HTTP_402_PAYMENT_REQUIRED)
+        self.assertIn('error', response.data)
 
     def test_invalid_card_length_is_rejected(self):
         """Card numbers must be exactly 16 digits"""
@@ -151,4 +159,4 @@ class PaymentValidationTests(TestCase):
         })
 
         # TODO: Assert status is 400 Bad Request
-        pass  # Replace with your assertion
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
