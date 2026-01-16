@@ -1,0 +1,52 @@
+name: Frontend CI
+
+on:
+    # TODO: Configure trigger
+    # - Pull requests to main branch
+    # - Only when frontend/ files change
+    pull_request:
+        branches:
+            - main
+        paths:
+            - "frontend/**"
+
+jobs:
+    quality:
+        # TODO: Configure the job
+        # - What runner? (ubuntu-latest)
+        # - What working directory? (frontend/)
+        runs-on: ubuntu-latest
+        defaults:
+            run:
+                working-directory: frontend/
+
+        steps:
+            # TODO: Add steps for:
+            # 1. Checkout code
+            # 2. Set up Node.js (version 20, with npm caching)
+            # 3. Install dependencies (npm ci)
+            # 4. Check formatting
+            # 5. Run linter
+            # 6. Run tests
+            - name: Checkout code
+              uses: actions/checkout@v3
+            - name: Set up Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: "20"
+                  # don't require an npm lockfile for the runner; fallback to npm install below
+            - name: Install dependencies
+              run: |
+                if [ -f package-lock.json ]; then
+                  npm ci
+                else
+                  npm install
+                fi
+            - name: Check formatting
+              run: npm run format:check
+            - name: Fix formatting
+              run : npm run format:fix
+            - name: Run linter
+              run: npm run lint
+            - name: Run tests
+              run: npm run test
