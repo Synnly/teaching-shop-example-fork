@@ -1,12 +1,12 @@
 from django.contrib.auth.models import User
-from rest_framework import viewsets, status
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
-from rest_framework.response import Response
+from rest_framework import status, viewsets
 from rest_framework.authtoken.models import Token
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
+from rest_framework.response import Response
 
-from .models import Product, Order
-from .serializers import ProductSerializer, OrderSerializer, AdminOrderSerializer
+from .models import Order, Product
+from .serializers import AdminOrderSerializer, OrderSerializer, ProductSerializer
 
 
 class ProductViewSet(viewsets.ModelViewSet):

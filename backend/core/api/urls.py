@@ -6,11 +6,10 @@ The `urlpatterns` list routes URLs to views. For more information please see:
 """
 
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import include, path
 from rest_framework import routers
 
-from .views import ProductViewSet, OrderViewSet, register, login, me, admin_orders
-
+from .views import OrderViewSet, ProductViewSet, admin_orders, login, me, register
 
 router = routers.DefaultRouter()
 router.register(r"products", ProductViewSet)

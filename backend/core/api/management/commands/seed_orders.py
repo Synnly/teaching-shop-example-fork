@@ -1,9 +1,11 @@
 import random
 from datetime import timedelta
-from django.core.management.base import BaseCommand
+
 from django.contrib.auth.models import User
+from django.core.management.base import BaseCommand
 from django.utils import timezone
-from api.models import Product, Order
+
+from api.models import Order, Product
 
 
 class Command(BaseCommand):
