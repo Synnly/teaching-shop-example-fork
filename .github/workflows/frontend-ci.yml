@@ -44,6 +44,7 @@ jobs:
                 fi
             - name: Check formatting
               run: npm run format:check
+              run : npm run format:fix
             - name: Run linter
               run: npm run lint
             - name: Run tests
