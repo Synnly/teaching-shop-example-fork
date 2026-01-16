@@ -11,6 +11,7 @@ export interface Order {
   created_at: string;
 }
 
+//  @typescript-eslint/no-empty-object-type
 interface CreateOrderResponse extends Order {}
 
 interface OrderError {

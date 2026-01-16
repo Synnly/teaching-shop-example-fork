@@ -1,29 +1,7 @@
-import {
-  createContext,
-  useContext,
-  useState,
-  useEffect,
-  type ReactNode,
-} from "react";
+import { useState, useEffect, type ReactNode } from "react";
 import { getMe } from "../api/auth";
-
-interface User {
-  id: number;
-  username: string;
-  email: string;
-  is_staff: boolean;
-}
-
-interface AuthContextType {
-  user: User | null;
-  token: string | null;
-  isAuthenticated: boolean;
-  isLoading: boolean;
-  login: (token: string, user: User) => void;
-  logout: () => void;
-}
-
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
+import { AuthContext } from "./authCore";
+import type { User } from "./authCore";
 
 export function AuthContextProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
@@ -84,10 +62,5 @@ export function AuthContextProvider({ children }: { children: ReactNode }) {
   );
 }
 
-export function useAuth() {
-  const context = useContext(AuthContext);
-  if (context === undefined) {
-    throw new Error("useAuth must be used within an AuthContextProvider");
-  }
-  return context;
-}
+// `useAuth` is exported from `authCore.ts` to keep this file exporting
+// only React components (fast-refresh requirement).
