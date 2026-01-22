@@ -1,0 +1,12 @@
+services:
+  backend:
+    # TODO 1: Set the build context to the backend directory
+    # Syntax: build: ./relative/path
+    build: ./
+
+    # TODO 2: Map port 8000 from container to host
+    # Syntax:
+    #   ports:
+    #     - "host_port:container_port"
+    ports:
+      - "8000:8000"

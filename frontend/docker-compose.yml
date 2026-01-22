@@ -1,0 +1,12 @@
+services:
+  frontend:
+    # TODO 1: Set the build context to the frontend directory
+    # Syntax: build: ./relative/path
+    build: ./
+
+    # TODO 2: Map port 3000 from container to host
+    # Syntax:
+    #   ports:
+    #     - "host_port:container_port"
+    ports:
+      - "3000:3000"
