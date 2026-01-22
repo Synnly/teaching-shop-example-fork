@@ -1,0 +1,7 @@
+.idea/
+.vscode/
+node_modules/
+test-results/
+playwright-report/
+e2e/
+dist/
