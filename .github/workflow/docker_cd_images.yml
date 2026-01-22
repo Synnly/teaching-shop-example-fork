@@ -1,0 +1,25 @@
+name: Build and push Docker images
+
+on:
+  push:
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:      
+      - name: Checkout
+          uses: actions/checkout@v5
+            
+      - name: Build and push backend
+          uses: docker/build-push-action@v6
+          with:
+            context: "{{defaultContext}}:backend"
+            push: true
+            tags: ghcr.io/Synnly/teaching-shop-example-fork/boutique-backend
+            
+      - name: Build and push frontend
+          uses: docker/build-push-action@v6
+          with:
+            context: "{{defaultContext}}:frontend"
+            push: true
+            tags: ghcr.io/Synnly/teaching-shop-example-fork/boutique-frontend
