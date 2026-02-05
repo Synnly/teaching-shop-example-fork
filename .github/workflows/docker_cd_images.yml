@@ -37,7 +37,7 @@ jobs:
           push: true
           tags: ghcr.io/synnly/teaching-shop-example-fork/boutique-frontend
       - name: push compose on vps
-        run: scp docker-compose.yml "/home/admin/app/docker-compose.yml":admin@${{secrets.HOST}}
+        run: scp docker-compose.yml admin@${{secrets.HOST}}:/home/admin/app
       - name: Pull on vps
         uses: appleboy/ssh-action@v1
         with:
