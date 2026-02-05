@@ -31,5 +31,7 @@ services:
       - "5000:80"
     depends_on:
       - backend
+    environment:
+      - ALLOWED_HOSTS : 15.237.110.131
 volumes:
   db_data:
