@@ -16,7 +16,7 @@ services:
   backend:
     image: ghcr.io/synnly/teaching-shop-example-fork/boutique-backend:latest
     ports:
-      - "8000:8000"
+      - "80:8000"
     environment:
       - DATABASE_HOST=db          # Service name = hostname!
       - DATABASE_NAME=boutique
@@ -28,7 +28,7 @@ services:
   frontend:
     image: ghcr.io/synnly/teaching-shop-example-fork/boutique-frontend:latest
     ports:
-      - "3000:80"
+      - "5000:80"
     depends_on:
       - backend
 volumes:
