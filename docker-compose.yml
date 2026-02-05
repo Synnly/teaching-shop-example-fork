@@ -14,7 +14,7 @@ services:
     volumes:
       - db_data:/var/lib/postgresql/data
   backend:
-    build: ./backend
+    image: ghcr.io/synnly/teaching-shop-example-fork/boutique-backend:latest
     ports:
       - "8000:8000"
     environment:
@@ -26,9 +26,7 @@ services:
       - db
 
   frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
+    image: ghcr.io/synnly/teaching-shop-example-fork/boutique-frontend:latest
     ports:
       - "3000:80"
     depends_on:
