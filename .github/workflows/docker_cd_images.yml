@@ -15,11 +15,11 @@ jobs:
         with:
           context: "{{defaultContext}}:backend"
           push: true
-          tags: ghcr.io/Synnly/teaching-shop-example-fork/boutique-backend
+          tags: ghcr.io/synnly/teaching-shop-example-fork/boutique-backend
             
       - name: Build and push frontend
         uses: docker/build-push-action@v6
         with:
           context: "{{defaultContext}}:frontend"
           push: true
-          tags: ghcr.io/Synnly/teaching-shop-example-fork/boutique-frontend
+          tags: ghcr.io/synnly/teaching-shop-example-fork/boutique-frontend
