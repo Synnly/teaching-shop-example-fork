@@ -1,1 +1,1 @@
-export const ADMIN_BASE_URL = "http://localhost:8000/admin/";
+export const ADMIN_BASE_URL = process.env.VITE_BACKEND_URL;
