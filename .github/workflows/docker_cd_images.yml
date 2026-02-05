@@ -36,8 +36,17 @@ jobs:
           context: "{{defaultContext}}:frontend"
           push: true
           tags: ghcr.io/synnly/teaching-shop-example-fork/boutique-frontend
-      - name: push compose on vps
-        run: scp docker-compose.yml admin@${{secrets.HOST}}:"/home/admin/app"
+          
+      - name: Copy compose to vps
+        uses: appleboy/scp-action@v1
+        with:
+          host: ${{ secrets.HOST }}
+          username: admin
+          key: ${{ secrets.SSH_KEY }}
+          port: 22
+          source: "docker-compose.yml"
+          target: "/home/admin/app"
+          
       - name: Pull on vps
         uses: appleboy/ssh-action@v1
         with:
